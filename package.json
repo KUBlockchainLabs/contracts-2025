@@ -5,16 +5,18 @@
 		"clean": "hardhat clean",
 		"compile": "hardhat compile",
 		"sizer": "hardhat size-contracts",
-		"coverage": "env coverage=true hardhat coverage",
 		"docgen": "scripts/docs.sh",
 		"prettier": "prettier --write 'contracts/**/*.sol' --write 'test/**/*.ts' --write 'docs/**/*.md'",
 		"solhint": "solhint 'contracts/**/*.sol'",
-		"test": "hardhat test ./test --trace"
+		"test": "hardhat test",
+		"test:gas": "gasReport=true hardhat test",
+		"test:trace": "hardhat test --trace",
+		"test:gas:trace": "gasReport=true hardhat test --trace",
+		"coverage": "coverage=true hardhat coverage"
 	},
 	"devDependencies": {
 		"@nomicfoundation/hardhat-toolbox": "^6.1.0",
 		"@types/minimatch": "^6.0.0",
-		"@types/yargs": "^17.0.33",
 		"hardhat": "^2.26.1",
 		"prettier-plugin-solidity": "^2.1.0"
 	},
@@ -24,10 +26,10 @@
 		"hardhat-contract-sizer": "^2.10.0",
 		"hardhat-ignore-warnings": "^0.2.12",
 		"hardhat-tracer": "^3.2.1",
+		"mocha-multi-reporters": "github:hayesgm/mocha-multi-reporters#hayesgm/reporter-options-to-option",
 		"prettier": "^3.6.2",
 		"solhint": "^6.0.0",
 		"solhint-plugin-prettier": "^0.1.0",
-		"solidity-docgen": "^0.6.0-beta.36",
-		"yargs": "^18.0.0"
+		"solidity-docgen": "^0.6.0-beta.36"
 	}
 }

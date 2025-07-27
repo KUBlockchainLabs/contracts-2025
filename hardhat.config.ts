@@ -1,11 +1,9 @@
 import "dotenv/config";
 import "hardhat-tracer";
 import "solidity-docgen";
-import yargs from "yargs";
 import "hardhat-abi-exporter";
 import "hardhat-contract-sizer";
 import "hardhat-ignore-warnings";
-import { hideBin } from "yargs/helpers";
 import "@nomicfoundation/hardhat-toolbox";
 import { HardhatUserConfig, task } from "hardhat/config";
 
@@ -31,20 +29,14 @@ task(
 	console.log("Accounts:", await Promise.all(addresses));
 });
 
-const argv = yargs(hideBin(process.argv))
-	.option("coverage", {
-		type: "boolean",
-		default: false,
-		description: "Enable coverage mode",
-	})
-	.option("gasReport", {
-		type: "boolean",
-		default: false,
-		description: "Enable gas reporting",
-	})
-	.help()
-	.alias("help", "h")
-	.parseSync();
+const argv = {
+	gasReport: process.env.gasReport === "true",
+	coverage: process.env.coverage === "true",
+};
+
+console.dir(argv, {
+	depth: null,
+});
 
 const config: HardhatUserConfig = {
 	solidity: {
@@ -66,7 +58,13 @@ const config: HardhatUserConfig = {
 	},
 	gasReporter: {
 		enabled: argv.gasReport,
+		L1: "polygon",
 		currency: "USD",
+		solcInfo: {
+			version: "0.8.21",
+			optimizer: true,
+			runs: 200,
+		},
 	},
 	docgen: {
 		outputDir: "./docs",
