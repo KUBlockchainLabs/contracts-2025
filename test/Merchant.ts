@@ -274,7 +274,9 @@ describe("Merchant", function () {
 				console.log(`\n📊 Gas Usage Comparison - Adding Items:`);
 				console.log(`   addItem():       ${gasUsed1.toString()} gas`);
 				console.log(`   addStructItem(): ${gasUsed2.toString()} gas`);
-				console.log(`   Difference:      ${(gasUsed1 - gasUsed2).toString()} gas`);
+				console.log(
+					`   Difference:      ${(gasUsed1 - gasUsed2).toString()} gas`,
+				);
 				console.log(
 					`   More efficient:  ${gasUsed1 < gasUsed2 ? "addItem()" : gasUsed2 < gasUsed1 ? "addStructItem()" : "Same"}`,
 				);
@@ -352,11 +354,15 @@ describe("Merchant", function () {
 				const gasEstimate3 = await merchant.getStructItem.estimateGas(0);
 
 				console.log(`\n📊 Gas Usage Comparison - Retrieving Items:`);
-				console.log(`   getItem():                ${gasEstimate1.toString()} gas`);
+				console.log(
+					`   getItem():                ${gasEstimate1.toString()} gas`,
+				);
 				console.log(
 					`   getItemNotLocalVariable(): ${gasEstimate2.toString()} gas`,
 				);
-				console.log(`   getStructItem():          ${gasEstimate3.toString()} gas`);
+				console.log(
+					`   getStructItem():          ${gasEstimate3.toString()} gas`,
+				);
 
 				// Find the most efficient
 				const gasAmounts = [
@@ -398,7 +404,8 @@ describe("Merchant", function () {
 					const gas2 = await merchant.getItemNotLocalVariable.estimateGas(i);
 					const gas3 = await merchant.getStructItem.estimateGas(i);
 
-					const itemName = i === 0 ? shortName : i === 1 ? mediumName : longName;
+					const itemName =
+						i === 0 ? shortName : i === 1 ? mediumName : longName;
 					results.push({
 						name: itemName,
 						length: itemName.length,
@@ -411,11 +418,15 @@ describe("Merchant", function () {
 				console.log(`\n📊 Gas Usage by String Length:`);
 				results.forEach((result, index) => {
 					console.log(`   Item ${index} (${result.length} chars):`);
-					console.log(`     getItem():                ${result.getItem.toString()} gas`);
+					console.log(
+						`     getItem():                ${result.getItem.toString()} gas`,
+					);
 					console.log(
 						`     getItemNotLocalVariable(): ${result.getItemNotLocalVariable.toString()} gas`,
 					);
-					console.log(`     getStructItem():          ${result.getStructItem.toString()} gas`);
+					console.log(
+						`     getStructItem():          ${result.getStructItem.toString()} gas`,
+					);
 				});
 
 				// Analyze the impact of string length
@@ -451,7 +462,9 @@ describe("Merchant", function () {
 				const addStructItemReceipt = await addStructItemTx.wait();
 
 				console.log(`\n📝 ADDING ITEMS:`);
-				console.log(`   addItem():       ${addItemReceipt!.gasUsed.toString()} gas`);
+				console.log(
+					`   addItem():       ${addItemReceipt!.gasUsed.toString()} gas`,
+				);
 				console.log(
 					`   addStructItem(): ${addStructItemReceipt!.gasUsed.toString()} gas`,
 				);
@@ -463,11 +476,15 @@ describe("Merchant", function () {
 				const getStructItemGas = await merchant.getStructItem.estimateGas(0);
 
 				console.log(`\n📖 READING ITEMS:`);
-				console.log(`   getItem():                ${getItemGas.toString()} gas`);
+				console.log(
+					`   getItem():                ${getItemGas.toString()} gas`,
+				);
 				console.log(
 					`   getItemNotLocalVariable(): ${getItemNotLocalGas.toString()} gas`,
 				);
-				console.log(`   getStructItem():          ${getStructItemGas.toString()} gas`);
+				console.log(
+					`   getStructItem():          ${getStructItemGas.toString()} gas`,
+				);
 
 				console.log(`\n💡 RECOMMENDATIONS:`);
 				console.log(
